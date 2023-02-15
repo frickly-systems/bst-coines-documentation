@@ -1,6 +1,5 @@
 site_name: COINES Documentations
-# TODO! Change site_url when known
-site_url: https://gitlab.com/frickly-systems/bst/coines-documentation
+site_url: https://frickly-systems.gitlab.io/bst/coines-documentation
 repo_url: https://gitlab.com/frickly-systems/bst/coines-documentation
 
 theme:
