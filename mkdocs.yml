@@ -1,0 +1,34 @@
+site_name: COINES Documentations
+# TODO! Change site_url when known
+site_url: https://gitlab.com/frickly-systems/bst/coines-documentation
+repo_url: https://gitlab.com/frickly-systems/bst/coines-documentation
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: pink
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: red
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.expand
+    - navigation.top
+    - header.autohide
+
+markdown_extensions:
+  - toc:
+      permalink: true
