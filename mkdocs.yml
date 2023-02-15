@@ -8,9 +8,9 @@ theme:
   favicon: assets/logo.svg
   palette:
     - media: "(prefers-color-scheme: light)"
-      scheme: default
-      primary: deep purple
-      accent: pink
+      # scheme: default
+      # primary: deep purple
+      # accent: pink
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
@@ -27,7 +27,17 @@ theme:
     - navigation.expand
     - navigation.top
     - header.autohide
+nav:
+  
+  - Introduction: 'index.md'
+  - Acessing the sensor on Application Board using C and SensorAPI:
+    - Introduction to COINES: 'accessing_the_sensor_on_application_board/introduction_to_coines.md'
+    - Working Principles:
+      - Running examples on PC side: 'accessing_the_sensor_on_application_board/running_examples_on_pc_side.md'
+      - Running examples directly on the MCU of the Application board: 'accessing_the_sensor_on_application_board/running_examples_directly_on_the_mcu_of_the_application_board.md'
 
 markdown_extensions:
   - toc:
       permalink: true
+  - attr_list
+  - md_in_html
