@@ -27,8 +27,11 @@ theme:
     - navigation.expand
     - navigation.top
     - header.autohide
+
+extra_css:
+  - stylesheets/extra.css      
+
 nav:
-  
   - Introduction: 'index.md'
   - Acessing the sensor on Application Board using C and SensorAPI:
     - Introduction to COINES: 'accessing_the_sensor_on_application_board/introduction_to_coines.md'
