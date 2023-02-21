@@ -18,4 +18,11 @@ jobs:
           key: ${{ github.ref }}
           path: .cache
       - run: pip install mkdocs-material mkdocs-with-pdf
+      - run: mkdocs build
       - run: mkdocs gh-deploy --force
+  
+      - name: Archive documentation pdf
+        uses: actions/upload-artifact@v3
+        with:
+          name: Documentation
+          path: site/pdf/document.pdf
