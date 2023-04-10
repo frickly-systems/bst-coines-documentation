@@ -1,33 +1,23 @@
-\subsection{Key Features}
+# Key Features
 
-\subsubsection{USB DFU}
+## USB DFU
 
-\begin{itemize}
-	\item Code download to RAM or FLASH
-	\item Code read back (upload) from  RAM or FLASH (Useful for taking firmware backups)
-	\item Works with Windows, Linux, macOS and Android.
-\end{itemize}
+- Code download to RAM or FLASH
+- Code read back (upload) from  RAM or FLASH (Useful for taking firmware backups)
+- Works with Windows, Linux, macOS and Android.
 
-\subsubsection{BLE DFU}
+## BLE DFU
 
-\begin{itemize}
-	\item Code download to FLASH.
-	\item Works with PC and mobile devices with iOS/Android.
-\end{itemize}
+- Code download to FLASH.
+- Works with PC and mobile devices with iOS/Android.
 
 Bootloader was written taking into account the following aspects
 
-\begin{itemize}
-	\item Usability.
-	\begin{enumerate}[label=\roman*.]
-		\item No special driver installation or admin rights should be required.
-		\item The update process should be straight forward.
-	\end{enumerate}
-	\item Maintainability
-	\begin{enumerate}[label=\roman*.]
-		\item Open source community takes care of PC side tools. For eg: dfu-util is a cross platform tool.
-		\item Use Google Chrome's WebUSB to update firmware. Sample implementation \url{https://devanlai.github.io/webdfu/dfu-util/}
-	\end{enumerate}
-	\item Size
-	\item COINES on MCU.
-\end{itemize}
+- Usability.
+	1. No special driver installation or admin rights should be required.
+	2. The update process should be straight forward.
+- Maintainability
+	1. Open source community takes care of PC side tools. For eg: dfu-util is a cross platform tool.
+	2. Use Google Chrome's WebUSB to update firmware. [Sample implementation](https://devanlai.github.io/webdfu/dfu-util/)
+- Size
+- COINES on MCU.
