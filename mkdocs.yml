@@ -27,6 +27,7 @@ theme:
     - navigation.expand
     - navigation.top
     - header.autohide
+    - content.code.copy
 
 extra_css:
   - stylesheets/extra.css      
