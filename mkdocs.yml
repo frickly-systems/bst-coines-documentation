@@ -75,6 +75,7 @@ nav:
     - Updating bootloader: 'updating_bootloader_dd_firmware_and_mtp_firmware/bootloader.md'
     - Updating DD firmware: 'updating_bootloader_dd_firmware_and_mtp_firmware/dd_firmware.md'
     - Updating MTP firmware: 'updating_bootloader_dd_firmware_and_mtp_firmware/mtp_firmware.md'
+  - Accessing the Application Board using Python: 'py_api/py_api.md'
   - FAQ: 'faq.md'
   - Legal disclaimer: 'legal_disclaimer.md'
 
