@@ -9,6 +9,6 @@ The drawback is that in this mode the code is not exected in real time, as it ru
 To overcome this drawback, the examples can also be run on the MCU side (see next section).
 
 <figure markdown>
-  ![Image: running example on PC side](running_example_on_pc_side.png)
+  ![Image: running example on PC side](working_princpile_run_on_pc.png)
   <figcaption>Working principle: running example on PC side</figcaption>
 </figure>

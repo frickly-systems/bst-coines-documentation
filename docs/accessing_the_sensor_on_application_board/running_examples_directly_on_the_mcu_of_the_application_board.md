@@ -15,6 +15,6 @@ This mode allows to also perfom many time-critical operations on the sensor, suc
 
 
 <figure markdown>
-  ![Image: running example on the MCU of the Application Board](running_example_on_the_mcu_of_the_application_board.png)
+  ![Image: running example on the MCU of the Application Board](working_princpile_run_on_mcu.png)
   <figcaption>Working principle: running example on the MCU of the Application Board</figcaption>
 </figure>
