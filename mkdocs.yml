@@ -58,6 +58,9 @@ nav:
       - Sensor communication: 'coines_api/api_calls/sensor_communication.md'
       - Streaming feature: 'coines_api/api_calls/streaming_feature.md'
       - Other useful APIs: 'coines_api/api_calls/other.md'
+  - Extending the usage of the example files: 
+    - Simple data logging: 'extending_the_usage_of_example_files/simple_data_logging.md'
+    - Data plotting and visualization: 'extending_the_usage_of_example_files/data_plotting_and_visualization.md'
 
 
 markdown_extensions:
