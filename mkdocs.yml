@@ -46,6 +46,18 @@ nav:
     - Compiling and executing code: 'quickstart/compiling_and_executing_code.md'
     - Cross compiling and downloading example to Application Board's microcontroller: 'quickstart/cross_compiling_and_downloading_example_to_application_board_microcontroller.md'
     - Eclipse project for examples: 'quickstart/eclipse_project_for_examples.md'
+  - coinesAPI description:
+    - Overview of PC side implementations of COINES: 'coines_api/overview_of_pc_side_implementation_of_coines.md'
+    - GPIO Mapping:
+      - APP2.0 shuttle board pins: 'coines_api/gpio_mapping/app20_shuttle_board.md'
+      - APP3.0 shuttle board pins: 'coines_api/gpio_mapping/app30_shuttle_board.md'
+    - coinesAPI calls:
+      - Inferface and board information: 'coines_api/api_calls/interface_and_board_information.md'
+      - GPIO oriented calls: 'coines_api/api_calls/gpio_oriented_calls.md'
+      - Sensor communication: 'coines_api/api_calls/sensor_communication.md'
+      - Streaming feature: 'coines_api/api_calls/streaming_feature.md'
+      - Other useful APIs: 'coines_api/api_calls/other.md'
+
 
 markdown_extensions:
   - toc:
