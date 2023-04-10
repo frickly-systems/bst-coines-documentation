@@ -1,7 +1,7 @@
 # Running examples on PC side
 When compiling the examples for PC side, the COINES layer provides an abstraction of the embedded environment on the host side.
-COINES library provides read and write functions for I2C and SPI on PC side.
-These functions receive the arguments of the user input (i.e. what register address to read from) and tunnel them through the USB connection to the Application Board, where they are fed into the embedded I2 C and SPI functions and are executed to access the sensor
+COINES library provides read and write functions for I~2~C and SPI on PC side.
+These functions receive the arguments of the user input (i.e. what register address to read from) and tunnel them through the USB connection to the Application Board, where they are fed into the embedded I~2~C and SPI functions and are executed to access the sensor
 Any result or response from those functions is tunneled back to the PC side and provided to the example application
 
 This approach allows easy and flexible programming and offers the possibility to integrate the example code into other applications or add advanced logging options

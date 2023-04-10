@@ -176,15 +176,15 @@ coinespy.Write(registerAddress, registerValue, sensorInterfaceDetail=None)
 
 The CSB pin shall be given as item from [ShuttleBoardPin](#shuttleboardpin).
 
-### SensorI2CConfig
+### SensorI~2~CConfig
 
-Sets the interface to I2C and sets the I2C speed.
+Sets the interface to I~2~C and sets the I~2~C speed.
 
 ```python
 coinespy.SensorI2CConfig(i2cAddress, I2CSPEED speed)
 ```
 
-For the definition of `I2CSPEED`, refer to [I2CSPEED](#i2cspeed).
+For the definition of `I2CSPEED`, refer to [I~2~CSPEED](#i2cspeed).
 
 ### SensorSPIConfig
 
@@ -259,9 +259,9 @@ class PCINTERFACE:
 	SERIAL = 1   # COINES_COMM_INTF_VCOM
 ```
 
-### I2CSPEED
+### I~2~CSPEED
 
-Definition of the I2C speed.
+Definition of the I~2~C speed.
 
 ```python
 class I2CSPEED:

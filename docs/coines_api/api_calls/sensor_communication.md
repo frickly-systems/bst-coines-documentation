@@ -1,7 +1,7 @@
 # coinesAPI calls: Sensor communication
 
 ## coines_config_i2c_bus
-Configures the I2C bus. 
+Configures the I~2~C bus. 
 
 ```C
 int16_t coines_config_i2c_bus(enum coines_i2c_bus bus, enum coines_i2c_mode i2c_mode);
@@ -10,7 +10,7 @@ int16_t coines_config_i2c_bus(enum coines_i2c_bus bus, enum coines_i2c_mode i2c_
 The first argument refers to the bus on the board.
 Currently, on APP2.0, there is only one bus available, so the argument is always `COINES_I2C_BUS_0`.
 
-The following I2C modes are available:
+The following I~2~C modes are available:
 ```C
 COINES_I2C_STANDARD_MODE
 COINES_I2C_FAST_MODE
@@ -49,7 +49,7 @@ int16_t coines_deconfig_spi_bus(enum coines_spi_bus bus);
 ```
 
 ## coines_deconfig_i2c_bus
-This API is used to de-configure the I2C bus
+This API is used to de-configure the I~2~C bus
 
 ```C
 int16_t coines_deconfig_i2c_bus(enum coines_i2c_bus bus);
@@ -63,7 +63,7 @@ void coines_deconfig_i2s_bus(void);
 ```
 
 ## coines_write_i2c
-Writes 8-bit register data to the I2C device at `COINES_I2C_BUS_0`.
+Writes 8-bit register data to the I~2~C device at `COINES_I2C_BUS_0`.
 
 ```C
 int8_t coines_write_i2c(enum coines_i2c_bus bus,uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint16_t count);
@@ -71,14 +71,14 @@ int8_t coines_write_i2c(enum coines_i2c_bus bus,uint8_t dev_addr, uint8_t reg_ad
 
 Arguments:
 
-- `bus`: I2C bus to be used
-- `dev_addr`: I2C device address.
+- `bus`: I~2~C bus to be used
+- `dev_addr`: I~2~C device address.
 - `reg_addr`: Starting address for writing the data.
 - `reg_data`: Data to be written.
 - `count`: Number of bytes to write.
 
 ## coines_read_i2c
-Reads 8-bit register data from the I2C device at `COINES_I2C_BUS_0`.
+Reads 8-bit register data from the I~2~C device at `COINES_I2C_BUS_0`.
 
 ```C
 int8_t coines_read_i2c(enum coines_i2c_bus bus,uint8_t dev_addr, uint8_t reg_addr, uint8_t *reg_data, uint16_t count);
@@ -86,8 +86,8 @@ int8_t coines_read_i2c(enum coines_i2c_bus bus,uint8_t dev_addr, uint8_t reg_add
 
 Arguments:
 
-- `bus`: I2C bus to be used
-- `dev_addr`: I2C device address.
+- `bus`: I~2~C bus to be used
+- `dev_addr`: I~2~C device address.
 - `reg_addr`: Starting address for reading the data.
 - `reg_data`: Buffer to take up the read data.
 - `count`: Number of bytes to read.
