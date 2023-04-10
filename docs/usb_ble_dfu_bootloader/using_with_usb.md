@@ -1,27 +1,21 @@
-\subsection{Using the Bootloader via USB}
+# Using the Bootloader via USB
 
 Write firmware to Flash memory using following command
-\begin{itemize}
-	\item dfu-util -a FLASH -D fw.bin -R
-\end{itemize}
+
+- dfu-util -a FLASH -D fw.bin -R
 
 Write firmware to RAM memory using following command
-\begin{itemize}
-	\item dfu-util -a RAM -D fw.bin -R
-\end{itemize}
+
+- dfu-util -a RAM -D fw.bin -R
 
 Read firmware from Flash memory using following command
-\begin{itemize}
-	\item dfu-util -a FLASH -U fw\_bkup.bin
-\end{itemize}
+
+- dfu-util -a FLASH -U fw\_bkup.bin
 
 Read firmware from RAM memory using following command
-\begin{itemize}
-	\item dfu-util -a RAM -U fw\_bkup.bin
-\end{itemize}
+
+- dfu-util -a RAM -U fw\_bkup.bin
 
 Read device serial number/ BLE MAC address
-\begin{itemize}
-	\item dfu-util -l
-\end{itemize}
 
+- dfu-util -l
