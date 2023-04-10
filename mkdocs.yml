@@ -42,12 +42,19 @@ nav:
     - System requirements: 'installation/system_requirements.md'
     - Windows: 'installation/windows.md'
     - Linux / MacOS: 'installation/linux_macos.md'
+  - quickstart:
+    - Compiling and executing code:
+      - COINES Code Editor: 'quickstart/compiling_and_executing_code/coines_code_editor.md'
+      - Command line: 'quickstart/compiling_and_executing_code/command_line.md'
+    - Cross compiling and downloading example to Application Board's microcontroller: 'quickstart/cross_compiling_and_downloading_example_to_application_board_microcontroller.md'
+    - Eclipse project for examples: 'quickstart/eclipse_project_for_examples.md'
 
 markdown_extensions:
   - toc:
       permalink: true
   - attr_list
   - md_in_html
+  - footnotes
     
 plugins:
     - with-pdf:
