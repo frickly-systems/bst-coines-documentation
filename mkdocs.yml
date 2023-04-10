@@ -1,6 +1,6 @@
 site_name: COINES Documentation
 site_url: https://frickly-systems.gitlab.io/bst/coines-documentation
-repo_url: https://gitlab.com/frickly-systems/bst/coines-documentation
+repo_url: https://github.com/frickly-systems/bst-coines-documentation
 
 theme:
   name: material
@@ -38,6 +38,10 @@ nav:
     - Working Principles:
       - Running examples on PC side: 'accessing_the_sensor_on_application_board/running_examples_on_pc_side.md'
       - Running examples directly on the MCU of the Application board: 'accessing_the_sensor_on_application_board/running_examples_directly_on_the_mcu_of_the_application_board.md'
+  - Installation:
+    - System requirements: 'installation/system_requirements.md'
+    - Windows: 'installation/windows.md'
+    - Linux / MacOS: 'installation/linux_macos.md'
 
 markdown_extensions:
   - toc:

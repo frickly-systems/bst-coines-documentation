@@ -7,22 +7,22 @@ elements:
 APP3.0 shuttle boards also known as mini shuttle boards has smaller form factor when compared with APP2.0 shuttle board.
 
 <figure markdown>
-  ![Image: APP2.0 shuttle board](app2_0_shuttle_board.png){ width="300"}
+  ![Image: APP2.0 shuttle board](bma222e_1_shuttle_board.jpg){ width="300"}
   <figcaption>APP2.0 shuttle board</figcaption>
 </figure>
 <figure markdown>
-  ![Image: APP3.0 shuttle board](app3_0_shuttle_board.png){ width="300"}
+  ![Image: APP3.0 shuttle board](bma423_shuttle_board.jpg){ width="300"}
   <figcaption>app3.0 shuttle board</figcaption>
 </figure>
 
 2. [Application Board](https://www.bosch-sensortec.com/software-tools/tools/application-board-3-0/) has a connector for the shuttle board and serves as interface translator from the sensor interface (I2C or SPI) to a USB interface, allowing PC software to communicate with the sensor on the shuttle.
 
 <figure markdown>
-  ![Image: Application Board 2.0](application_board2_0.png){ width="300"}
+  ![Image: Application Board 2.0](application_board_20.png){ width="300"}
   <figcaption>Application Board 2.0</figcaption>
 </figure>
 <figure markdown>
-  ![Image: Application Board 3.0](application_board3_0.png){ width="300"}
+  ![Image: Application Board 3.0](application_board_30.jpg){ width="300"}
   <figcaption>Application Board 3.0</figcaption>
 </figure>
 
