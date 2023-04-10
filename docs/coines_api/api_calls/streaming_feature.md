@@ -28,11 +28,11 @@ The below parameters should always be set:
 	- `data_block.reg_start_addr[b]`: start address of the block in the register map
 	- `stream_block.no_of_data_bytes[b]`: number of addresses to read, starting from the start address
 
-For reading data from I2C bus,then set the below parameters:
+For reading data from I~2~C bus,then set the below parameters:
 	
 - `stream_config.intf = COINES_SENSOR_INTF_I2C;`
-- `stream_config.i2c_bus`: I2C bus (in case of APP2.0, this is always `COINES_I2C_BUS_0`)
-- `stream_config.dev_addr`: I2C address of the sensor
+- `stream_config.i2c_bus`: I~2~C bus (in case of APP2.0, this is always `COINES_I2C_BUS_0`)
+- `stream_config.dev_addr`: I~2~C address of the sensor
 
 For reading data from SPI bus, then set the below parameters:
 
