@@ -61,6 +61,11 @@ nav:
   - Extending the usage of the example files: 
     - Simple data logging: 'extending_the_usage_of_example_files/simple_data_logging.md'
     - Data plotting and visualization: 'extending_the_usage_of_example_files/data_plotting_and_visualization.md'
+  - Media Transfer Protocol (MTP) firmware for Application Board 3.0:
+    - MTP fimrware for Application Board 3.0: 'mtp_firmware_for_app30/mtp_firmware_for_app30.md'
+    - Switching to MTP mode: 'mtp_firmware_for_app30/switching_to_mtp_mode.md'
+    - Copying the files using MTP: 'mtp_firmware_for_app30/copying_files_using_mtp.md'
+
 
 
 markdown_extensions:
