@@ -65,6 +65,16 @@ nav:
     - MTP fimrware for Application Board 3.0: 'mtp_firmware_for_app30/mtp_firmware_for_app30.md'
     - Switching to MTP mode: 'mtp_firmware_for_app30/switching_to_mtp_mode.md'
     - Copying the files using MTP: 'mtp_firmware_for_app30/copying_files_using_mtp.md'
+  - USB/BLE DFU bootloader: 
+    - USB/BLE DFU bootloader: 'usb_ble_dfu_bootloader/usb_ble_dfu_bootloader.md'
+    - Key Features: 'usb_ble_dfu_bootloader/key_features.md'
+    - Invoking the Bootloader: 'usb_ble_dfu_bootloader/invoking_the_bootloader.md'
+    - Using the Bootloader via USB: 'usb_ble_dfu_bootloader/using_with_usb.md'
+    - Using the Bootloader via BLE: 'usb_ble_dfu_bootloader/using_with_ble.md'
+  - Updating Bootloader, DD firmware and MTP firmware using COINES:
+    - Updating bootloader: 'updating_bootloader_dd_firmware_and_mtp_firmware/bootloader.md'
+    - Updating DD firmware: 'updating_bootloader_dd_firmware_and_mtp_firmware/dd_firmware.md'
+    - Updating MTP firmware: 'updating_bootloader_dd_firmware_and_mtp_firmware/mtp_firmware.md'
 
 
 
