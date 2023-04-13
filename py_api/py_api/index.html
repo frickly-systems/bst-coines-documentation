@@ -1,0 +1,2166 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://frickly-systems.gitlab.io/bst/coines-documentation/py_api/py_api/">
+      
+      
+        <link rel="prev" href="../../updating_bootloader_dd_firmware_and_mtp_firmware/mtp_firmware/">
+      
+      
+        <link rel="next" href="../../faq/">
+      
+      <link rel="icon" href="../../assets/logo.svg">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
+    
+    
+      
+        <title>Accessing the Application Board using Python - COINES Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ded33207.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#accessing-the-application-board-using-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="COINES Documentation" class="md-header__button md-logo" aria-label="COINES Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            COINES Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Accessing the Application Board using Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="red"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/frickly-systems/bst-coines-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="COINES Documentation" class="md-nav__button md-logo" aria-label="COINES Documentation" data-md-component="logo">
+      
+  <img src="../../assets/logo.svg" alt="logo">
+
+    </a>
+    COINES Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/frickly-systems/bst-coines-documentation" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Acessing the sensor on Application Board using C and SensorAPI
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Acessing the sensor on Application Board using C and SensorAPI
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accessing_the_sensor_on_application_board/introduction_to_coines/" class="md-nav__link">
+        Introduction to COINES
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          Working Principles
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Working Principles
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accessing_the_sensor_on_application_board/running_examples_on_pc_side/" class="md-nav__link">
+        Running examples on PC side
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../accessing_the_sensor_on_application_board/running_examples_directly_on_the_mcu_of_the_application_board/" class="md-nav__link">
+        Running examples directly on the MCU of the Application board
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Installation
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Installation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/system_requirements/" class="md-nav__link">
+        System requirements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/windows/" class="md-nav__link">
+        Windows
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/linux_macos/" class="md-nav__link">
+        Linux / MacOS
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Quickstart
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Quickstart
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/compiling_and_executing_code/" class="md-nav__link">
+        Compiling and executing code
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/cross_compiling_and_downloading_example_to_application_board_microcontroller/" class="md-nav__link">
+        Cross compiling and downloading example to Application Board's microcontroller
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/eclipse_project_for_examples/" class="md-nav__link">
+        Eclipse project for examples
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          coinesAPI description
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          coinesAPI description
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/overview_of_pc_side_implementation_of_coines/" class="md-nav__link">
+        Overview of PC side implementations of COINES
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+          GPIO Mapping
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPIO Mapping
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/gpio_mapping/app20_shuttle_board/" class="md-nav__link">
+        APP2.0 shuttle board pins
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/gpio_mapping/app30_shuttle_board/" class="md-nav__link">
+        APP3.0 shuttle board pins
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+          coinesAPI calls
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          coinesAPI calls
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/api_calls/interface_and_board_information/" class="md-nav__link">
+        Inferface and board information
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/api_calls/gpio_oriented_calls/" class="md-nav__link">
+        GPIO oriented calls
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/api_calls/sensor_communication/" class="md-nav__link">
+        Sensor communication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/api_calls/streaming_feature/" class="md-nav__link">
+        Streaming feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../coines_api/api_calls/other/" class="md-nav__link">
+        Other useful APIs
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          Extending the usage of the example files
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Extending the usage of the example files
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extending_the_usage_of_example_files/simple_data_logging/" class="md-nav__link">
+        Simple data logging
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../extending_the_usage_of_example_files/data_plotting_and_visualization/" class="md-nav__link">
+        Data plotting and visualization
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          Media Transfer Protocol (MTP) firmware for Application Board 3.0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Media Transfer Protocol (MTP) firmware for Application Board 3.0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mtp_firmware_for_app30/mtp_firmware_for_app30/" class="md-nav__link">
+        MTP fimrware for Application Board 3.0
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mtp_firmware_for_app30/switching_to_mtp_mode/" class="md-nav__link">
+        Switching to MTP mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mtp_firmware_for_app30/copying_files_using_mtp/" class="md-nav__link">
+        Copying the files using MTP
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          USB/BLE DFU bootloader
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          USB/BLE DFU bootloader
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usb_ble_dfu_bootloader/usb_ble_dfu_bootloader/" class="md-nav__link">
+        USB/BLE DFU bootloader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usb_ble_dfu_bootloader/key_features/" class="md-nav__link">
+        Key Features
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usb_ble_dfu_bootloader/invoking_the_bootloader/" class="md-nav__link">
+        Invoking the Bootloader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usb_ble_dfu_bootloader/using_with_usb/" class="md-nav__link">
+        Using the Bootloader via USB
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usb_ble_dfu_bootloader/using_with_ble/" class="md-nav__link">
+        Using the Bootloader via BLE
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Updating Bootloader, DD firmware and MTP firmware using COINES
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Updating Bootloader, DD firmware and MTP firmware using COINES
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../updating_bootloader_dd_firmware_and_mtp_firmware/bootloader/" class="md-nav__link">
+        Updating bootloader
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../updating_bootloader_dd_firmware_and_mtp_firmware/dd_firmware/" class="md-nav__link">
+        Updating DD firmware
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../updating_bootloader_dd_firmware_and_mtp_firmware/mtp_firmware/" class="md-nav__link">
+        Updating MTP firmware
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Accessing the Application Board using Python
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Accessing the Application Board using Python
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-coinespy-library" class="md-nav__link">
+    Introduction to coinespy library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-description" class="md-nav__link">
+    coinespy API description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-interface-and-board-information" class="md-nav__link">
+    coinespy API calls: Interface and board information
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: Interface and board information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pcinterfaceconfig" class="md-nav__link">
+    PCInterfaceConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closepcinterface" class="md-nav__link">
+    ClosePCInterface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getboardinfo" class="md-nav__link">
+    GetBoardInfo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-gpio-oriented-calls" class="md-nav__link">
+    coinespy API calls: GPIO oriented calls
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: GPIO oriented calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pinconfig" class="md-nav__link">
+    PinConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpinconfig" class="md-nav__link">
+    GetPinConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setvdd" class="md-nav__link">
+    SetVDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setvddio" class="md-nav__link">
+    SetVDDIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-sensor-communication" class="md-nav__link">
+    coinespy API calls: Sensor communication
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: Sensor communication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    Read
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write" class="md-nav__link">
+    Write
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensori2cconfig" class="md-nav__link">
+    SensorI2CConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensorspiconfig" class="md-nav__link">
+    SensorSPIConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customspiconfig" class="md-nav__link">
+    CustomSPIConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensor16bitspiconfig" class="md-nav__link">
+    Sensor16bitSPIConfig
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definiton-of-constants" class="md-nav__link">
+    Definiton of constants
+  </a>
+  
+    <nav class="md-nav" aria-label="Definiton of constants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eonoff" class="md-nav__link">
+    EONOFF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinmode" class="md-nav__link">
+    PINMODE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinlevel" class="md-nav__link">
+    PINLEVEL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcinterface" class="md-nav__link">
+    PCINTERFACE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i2cspeed" class="md-nav__link">
+    I2CSPEED
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spispeed" class="md-nav__link">
+    SPISPEED
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spibits" class="md-nav__link">
+    SPIBITS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spimode" class="md-nav__link">
+    SPIMODE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuttleboardpin" class="md-nav__link">
+    ShuttleBoardPin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiio" class="md-nav__link">
+    MULTIIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    Error Codes
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-error-codes" class="md-nav__link">
+    General Error Codes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinconfig-specific-error-codes" class="md-nav__link">
+    Pinconfig Specific Error Codes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readwrite-specific-error-codes" class="md-nav__link">
+    Read/Write Specific Error Codes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-from-genericapi-to-coinespy" class="md-nav__link">
+    Migration from 'GenericAPI' to coinespy
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        FAQ
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../legal_disclaimer/" class="md-nav__link">
+        Legal disclaimer
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-coinespy-library" class="md-nav__link">
+    Introduction to coinespy library
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-description" class="md-nav__link">
+    coinespy API description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-interface-and-board-information" class="md-nav__link">
+    coinespy API calls: Interface and board information
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: Interface and board information">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pcinterfaceconfig" class="md-nav__link">
+    PCInterfaceConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closepcinterface" class="md-nav__link">
+    ClosePCInterface
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getboardinfo" class="md-nav__link">
+    GetBoardInfo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-gpio-oriented-calls" class="md-nav__link">
+    coinespy API calls: GPIO oriented calls
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: GPIO oriented calls">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pinconfig" class="md-nav__link">
+    PinConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getpinconfig" class="md-nav__link">
+    GetPinConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setvdd" class="md-nav__link">
+    SetVDD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setvddio" class="md-nav__link">
+    SetVDDIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coinespy-api-calls-sensor-communication" class="md-nav__link">
+    coinespy API calls: Sensor communication
+  </a>
+  
+    <nav class="md-nav" aria-label="coinespy API calls: Sensor communication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read" class="md-nav__link">
+    Read
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write" class="md-nav__link">
+    Write
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensori2cconfig" class="md-nav__link">
+    SensorI2CConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensorspiconfig" class="md-nav__link">
+    SensorSPIConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#customspiconfig" class="md-nav__link">
+    CustomSPIConfig
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensor16bitspiconfig" class="md-nav__link">
+    Sensor16bitSPIConfig
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definiton-of-constants" class="md-nav__link">
+    Definiton of constants
+  </a>
+  
+    <nav class="md-nav" aria-label="Definiton of constants">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eonoff" class="md-nav__link">
+    EONOFF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinmode" class="md-nav__link">
+    PINMODE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinlevel" class="md-nav__link">
+    PINLEVEL
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcinterface" class="md-nav__link">
+    PCINTERFACE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#i2cspeed" class="md-nav__link">
+    I2CSPEED
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spispeed" class="md-nav__link">
+    SPISPEED
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spibits" class="md-nav__link">
+    SPIBITS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spimode" class="md-nav__link">
+    SPIMODE
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuttleboardpin" class="md-nav__link">
+    ShuttleBoardPin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiio" class="md-nav__link">
+    MULTIIO
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-codes" class="md-nav__link">
+    Error Codes
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Codes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-error-codes" class="md-nav__link">
+    General Error Codes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pinconfig-specific-error-codes" class="md-nav__link">
+    Pinconfig Specific Error Codes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#readwrite-specific-error-codes" class="md-nav__link">
+    Read/Write Specific Error Codes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-from-genericapi-to-coinespy" class="md-nav__link">
+    Migration from 'GenericAPI' to coinespy
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="accessing-the-application-board-using-python">Accessing the Application Board using Python<a class="headerlink" href="#accessing-the-application-board-using-python" title="Permanent link">&para;</a></h1>
+<h2 id="introduction-to-coinespy-library">Introduction to <code>coinespy</code> library<a class="headerlink" href="#introduction-to-coinespy-library" title="Permanent link">&para;</a></h2>
+<p>The <code>coinespy</code> library allows users to access the Bosch Sensortec Application Board using Python. </p>
+<ul>
+<li>Control VDD and VDDIO of sensor</li>
+<li>Configure SPI and I<sub>2</sub>C bus parameters</li>
+<li>Read and write into registers of sensors from Bosch Sensortec via SPI and I<sub>2</sub>C</li>
+<li>Read and write digital pins of the Application Board</li>
+</ul>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The coinespy module can be installed using pip:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>coinespy
+</span></code></pre></div>
+<p>Linux users may have to use the below commands due to co-existence of Python 2.7 and Python 3.x</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>coinespy
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>coinespy
+</span></code></pre></div>
+<p>The module can be found on <a href="https://pypi.org/project/coinespy/">https://pypi.org/project/coinespy/</a> and also in the COINES installation folder, precisely in the subfolder <code>coines-api\textbackslash pc\textbackslash python</code>, in which a python wheel package is placed. </p>
+<p>When running a python script and importing coinespy, the underlying ctypes module will try to load the shared library coineslib.dll (on Windows systems; on Linux systems the lib is called coineslib.so).
+The search stategy is as follows:</p>
+<ul>
+<li>One of the libraries included in the wheel package is checked.
+There are precompiled libraries available for a certain combination of operating systems and hardware configurations (e.g. Windows 64-bit, 32-bit, macOS, Linux ARMv7, x86, 64-bit).
+Depending on the user's configuration, the user may be lucky and the precompiled library works.</li>
+<li>If the user has compiled an own library using COINES, but has installed COINES into another folder than the default folder, the user can point to the right library inside the python code by initializing the <code>UserApplicationBoard</code> with the path to the library:<br />
+<code>coinespy.UserApplicationBoard(r'C:\textbackslash PATH\textbackslash TO\textbackslash MY\textbackslash libcoines.dll')</code></li>
+</ul>
+<p>It is highly recommended that the user is testing the following script (can be found as <code>examples\textbackslash python\textbackslash coinespy\_test.py</code> in the COINES installation) to check if the installation was successful:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">coinespy</span> <span class="k">as</span> <span class="nn">BST</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">board</span> <span class="o">=</span> <span class="n">BST</span><span class="o">.</span><span class="n">UserApplicationBoard</span><span class="p">()</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="c1"># If you get an error message on startup, that coineslib could not be loaded, then</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="c1"># intialize the UserApplicationBoard object with the path to the library, e.g.</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="c1">#board = BST.UserApplicationBoard(r&#39;C:\COINES\v2.1\coinesAPI\libcoines.dll&#39;)</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">board</span><span class="o">.</span><span class="n">PCInterfaceConfig</span><span class="p">(</span><span class="n">BST</span><span class="o">.</span><span class="n">PCINTERFACE</span><span class="o">.</span><span class="n">USB</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">if</span> <span class="n">board</span><span class="o">.</span><span class="n">ERRORCODE</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Could not connect to board: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">board</span><span class="o">.</span><span class="n">ERRORCODE</span><span class="p">))</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="n">b_info</span> <span class="o">=</span> <span class="n">board</span><span class="o">.</span><span class="n">GetBoardInfo</span><span class="p">()</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BoardInfo: HW/SW ID: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b_info</span><span class="o">.</span><span class="n">HardwareId</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">b_info</span><span class="o">.</span><span class="n">SoftwareId</span><span class="p">))</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>    <span class="n">board</span><span class="o">.</span><span class="n">ClosePCInterface</span><span class="p">()</span>
+</span></code></pre></div>
+<h2 id="coinespy-api-description">coinespy API description<a class="headerlink" href="#coinespy-api-description" title="Permanent link">&para;</a></h2>
+<p>As coinespy is only a wrapper on top of coinesAPI, the following API documentation is limited to the wrapper only.
+Details about meaning of variables and functionality can be found in the corresponding coinesAPI documentation in the chapter above.</p>
+<p>Note: the streaming functionality (polling or interrupt streaming) is not available through the python interface.</p>
+<h2 id="coinespy-api-calls-interface-and-board-information">coinespy API calls: Interface and board information<a class="headerlink" href="#coinespy-api-calls-interface-and-board-information" title="Permanent link">&para;</a></h2>
+<p>The following function calls are defined within the class <code>UserApplicationBoard</code>.
+Thus in order to access the functions, the user has to create an object of that class first.</p>
+<h3 id="pcinterfaceconfig">PCInterfaceConfig<a class="headerlink" href="#pcinterfaceconfig" title="Permanent link">&para;</a></h3>
+<p>Sets the communication interface between board and PC to USB or Serial.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">PCInterfaceConfig</span><span class="p">(</span><span class="n">PCINTERFACE</span> <span class="n">communicationChannel</span><span class="p">,</span> <span class="n">string</span> <span class="n">portName</span><span class="p">)</span>
+</span></code></pre></div>
+<p>For the definition of <code>PCINTERFACE</code>, refer to <a href="#pcinterface">PCINTERFACE</a>.</p>
+<h3 id="closepcinterface">ClosePCInterface<a class="headerlink" href="#closepcinterface" title="Permanent link">&para;</a></h3>
+<p>Disposes the resources used by the USB/serial communication.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">ClosePCInterface</span><span class="p">()</span>
+</span></code></pre></div>
+<h3 id="getboardinfo">GetBoardInfo<a class="headerlink" href="#getboardinfo" title="Permanent link">&para;</a></h3>
+<p>Obtains board specific information.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">BoardInfo</span> <span class="o">=</span> <span class="n">coinespy</span><span class="o">.</span><span class="n">BoardInfo</span> <span class="o">=</span> <span class="n">coinespy</span><span class="o">.</span><span class="n">GetBoardInfo</span><span class="p">()</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1"># Return:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">BoardInfo</span><span class="o">.</span><span class="n">HardwareId</span>    <span class="c1"># Hardware ID</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">BoardInfo</span><span class="o">.</span><span class="n">SoftwareId</span>    <span class="c1"># Firmware version information</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">BoardInfo</span><span class="o">.</span><span class="n">Board</span>         <span class="c1"># Board type</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="n">BoardInfo</span><span class="o">.</span><span class="n">ShuttleID</span>     <span class="c1"># ID of shuttle, in case a shuttle is detected</span>
+</span></code></pre></div>
+<h2 id="coinespy-api-calls-gpio-oriented-calls">coinespy API calls: GPIO oriented calls<a class="headerlink" href="#coinespy-api-calls-gpio-oriented-calls" title="Permanent link">&para;</a></h2>
+<h3 id="pinconfig">PinConfig<a class="headerlink" href="#pinconfig" title="Permanent link">&para;</a></h3>
+<p>Configures the state, level and direction of a GPIO pin</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">PinConfig</span><span class="p">(</span><span class="nb">int</span> <span class="n">pinNumber</span><span class="p">,</span> <span class="n">EONOFF</span> <span class="n">switchState</span><span class="p">,</span> <span class="n">PINMODE</span> <span class="n">direction</span><span class="p">,</span> <span class="n">PINLEVEL</span> <span class="n">outputState</span><span class="p">)</span>
+</span></code></pre></div>
+<p>For the definition of <code>EONOFF</code>, refer to <a href="#eonoff">EONOFF</a>. For the definition of <code>PINMODE</code>, refer to <a href="#pinmode">PINMODE</a>. For <code>PINLEVEL</code>, refer to <a href="#pinlevel">PINLEVEL</a>.</p>
+<h3 id="getpinconfig">GetPinConfig<a class="headerlink" href="#getpinconfig" title="Permanent link">&para;</a></h3>
+<p>Obtains information regarding the Pin's state, level and direction.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">PinConfigInfo</span> <span class="o">=</span> <span class="n">coinespy</span><span class="o">.</span><span class="n">GetPinConfig</span><span class="p">(</span><span class="n">ushort</span> <span class="n">pinNumber</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Return:</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">PinConfigInfo</span><span class="o">.</span><span class="n">direction</span>         <span class="c1"># 0: INPUT, 1: OUTPUT</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">PinConfigInfo</span><span class="o">.</span><span class="n">switchState</span>       <span class="c1"># 0: OFF, 1: ON</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">PinConfigInfo</span><span class="o">.</span><span class="n">level</span>             <span class="c1"># 1: HIGH, 0: LOW</span>
+</span></code></pre></div>
+<h3 id="setvdd">SetVDD<a class="headerlink" href="#setvdd" title="Permanent link">&para;</a></h3>
+<p>Set the VDD voltage level.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">SetVDD</span><span class="p">(</span><span class="n">volts</span><span class="p">)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Example: coinespy.SetVDD(3.3)</span>
+</span></code></pre></div>
+<h3 id="setvddio">SetVDDIO<a class="headerlink" href="#setvddio" title="Permanent link">&para;</a></h3>
+<p>Set the VDDIO voltage level.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">SetVDDIO</span><span class="p">(</span><span class="n">volts</span><span class="p">)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1"># Example: coinespy.SetVDDIO(3.3)</span>
+</span></code></pre></div>
+<h2 id="coinespy-api-calls-sensor-communication">coinespy API calls: Sensor communication<a class="headerlink" href="#coinespy-api-calls-sensor-communication" title="Permanent link">&para;</a></h2>
+<h3 id="read">Read<a class="headerlink" href="#read" title="Permanent link">&para;</a></h3>
+<p>Reads data from the sensor.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">data</span> <span class="o">=</span> <span class="n">coinespy</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="n">registerAddress</span><span class="p">,</span> <span class="n">numberofReads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sensorInterfaceDetail</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># sensorInterfaceDetail:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1">#   * SPI configuration: CSB pin (class ShuttleBoardPin)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1">#   * I2C configuration: i2c address</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="c1">#   * Can be left empty if only one sensor is on the bus. configured through SensorSPIConfig or SensorI2CConfig</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c1"># Return: list of retrieved values as int type.</span>
+</span></code></pre></div>
+<p>The CSB pin shall be given as item from <a href="#shuttleboardpin">ShuttleBoardPin</a>.</p>
+<h3 id="write">Write<a class="headerlink" href="#write" title="Permanent link">&para;</a></h3>
+<p>Writes data to a partcular register.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">registerAddress</span><span class="p">,</span> <span class="n">registerValue</span><span class="p">,</span> <span class="n">sensorInterfaceDetail</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># registerValue: either a single value of type int or an array of values to be written to the sensor. The function supports burst write (i.e. in case of more than one byte to write, register address is incremented for each following byte). Recommendation is to only write one byte at a time otherwise a long delay after the write command has to be considered.</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1"># sensorInterfaceDetail:</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="c1">#   * SPI configuration: CSB pin (class ShuttleBoardPin)</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="c1">#   * I2C configuration: i2c address</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="c1">#   * Can be left empty if only one sensor is on the bus. configured through SensorSPIConfig or SensorI2CConfig</span>
+</span></code></pre></div>
+<p>The CSB pin shall be given as item from <a href="#shuttleboardpin">ShuttleBoardPin</a>.</p>
+<h3 id="sensori2cconfig">SensorI<sub>2</sub>CConfig<a class="headerlink" href="#sensori2cconfig" title="Permanent link">&para;</a></h3>
+<p>Sets the interface to I<sub>2</sub>C and sets the I<sub>2</sub>C speed.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">SensorI2CConfig</span><span class="p">(</span><span class="n">i2cAddress</span><span class="p">,</span> <span class="n">I2CSPEED</span> <span class="n">speed</span><span class="p">)</span>
+</span></code></pre></div>
+<p>For the definition of <code>I2CSPEED</code>, refer to <a href="#i2cspeed">I<sub>2</sub>CSPEED</a>.</p>
+<h3 id="sensorspiconfig">SensorSPIConfig<a class="headerlink" href="#sensorspiconfig" title="Permanent link">&para;</a></h3>
+<p>Set the interface to SPI and sets the SPI speed and mode.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">SensorSPIConfig</span><span class="p">(</span><span class="n">chipSelectPin</span><span class="p">,</span> <span class="n">SPISPEED</span> <span class="n">spiSpeed</span><span class="o">=</span><span class="n">SPISPEED</span><span class="o">.</span><span class="n">SPI1000KBIT</span><span class="p">,</span> <span class="n">SPIMODE</span> <span class="n">spiMode</span><span class="o">=</span><span class="n">SPIMODE</span><span class="o">.</span><span class="n">MODE0</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The CSB pin shall be given as item from <a href="#shuttleboardpin">ShuttleBoardPin</a>.</p>
+<p>For the definition of <code>SPISPEED</code>, refer to <a href="#spispeed">SPISPEED</a>. For the definition of <code>SPIMODE</code>, refer to <a href="#spimode">SPIMODE</a>.</p>
+<h3 id="customspiconfig">CustomSPIConfig<a class="headerlink" href="#customspiconfig" title="Permanent link">&para;</a></h3>
+<p>Configures the SPI and sets the speed and mode. Difference to the <code>SensorSPIConfig</code> is, that in this function the SPI speed can be given in a free format. Only available for backward-compatibility with GenericAPI.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">CustomSPIConfig</span><span class="p">(</span><span class="n">sensorId</span><span class="p">,</span> <span class="n">chipSelectPin</span><span class="p">,</span> <span class="n">spiSpeed</span><span class="p">,</span> <span class="n">SPIMODE</span> <span class="n">spiMode</span><span class="o">=</span><span class="n">SPIMODE</span><span class="o">.</span><span class="n">MODE0</span><span class="p">)</span>
+</span></code></pre></div>
+<p>The CSB pin shall be given as item from <a href="#shuttleboardpin">ShuttleBoardPin</a>.</p>
+<p>For the definition of <code>SPISPEED</code>, refer to <a href="#spispeed">SPISPEED</a>. For the definition of <code>SPIMODE</code>, refer to <a href="#spimode">SPIMODE</a>.</p>
+<h3 id="sensor16bitspiconfig">Sensor16bitSPIConfig<a class="headerlink" href="#sensor16bitspiconfig" title="Permanent link">&para;</a></h3>
+<p>Configures SPI for 16-bit read and write.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">coinespy</span><span class="o">.</span><span class="n">Sensor16bitSPIConfig</span><span class="p">(</span><span class="n">chipSelectPin</span><span class="p">,</span> <span class="n">spiSpeed</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">spiMode</span><span class="o">=</span><span class="n">SPIMODE</span><span class="o">.</span><span class="n">MODE0</span><span class="p">,</span> <span class="n">spiBits</span><span class="o">=</span><span class="n">SPIBITS</span><span class="o">.</span><span class="n">SPI16BIT</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="definiton-of-constants">Definiton of constants<a class="headerlink" href="#definiton-of-constants" title="Permanent link">&para;</a></h2>
+<h3 id="eonoff">EONOFF<a class="headerlink" href="#eonoff" title="Permanent link">&para;</a></h3>
+<p>Defintion of value for ON and OFF.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">class</span> <span class="nc">EONOFF</span><span class="p">:</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="n">OFF</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">ON</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></div>
+<h3 id="pinmode">PINMODE<a class="headerlink" href="#pinmode" title="Permanent link">&para;</a></h3>
+<p>Definition of value for direction state of the pin. Sets to output or input.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">class</span> <span class="nc">PINMODE</span><span class="p">:</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="n">INPUT</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># COINES_PIN_DIRECTION_IN = 0</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="n">OUTPUT</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></div>
+<h3 id="pinlevel">PINLEVEL<a class="headerlink" href="#pinlevel" title="Permanent link">&para;</a></h3>
+<p>Definition of value for pin level status. Either high or low.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">class</span> <span class="nc">PINLEVEL</span><span class="p">:</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">LOW</span> <span class="o">=</span> <span class="mi">0</span>         <span class="c1"># COINES_PIN_VALUE_LOW = 0</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">HIGH</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></div>
+<h3 id="pcinterface">PCINTERFACE<a class="headerlink" href="#pcinterface" title="Permanent link">&para;</a></h3>
+<p>Definition to activate the communication channel.\newline</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">class</span> <span class="nc">PCINTERFACE</span><span class="p">:</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">USB</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># COINES_COMM_INTF_USB</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="n">SERIAL</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># COINES_COMM_INTF_VCOM</span>
+</span></code></pre></div>
+<h3 id="i2cspeed">I<sub>2</sub>CSPEED<a class="headerlink" href="#i2cspeed" title="Permanent link">&para;</a></h3>
+<p>Definition of the I<sub>2</sub>C speed.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">class</span> <span class="nc">I2CSPEED</span><span class="p">:</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="n">STANDARDMODE</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Standard mode - 100kHz</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="n">FASTMODE</span> <span class="o">=</span> <span class="mi">1</span>        <span class="c1"># Fast mode - 400kHz</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="n">HSMODE</span> <span class="o">=</span> <span class="mi">2</span>          <span class="c1"># High Speed mode - 3.4 MHz</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="n">HSMODE2</span> <span class="o">=</span> <span class="mi">3</span>         <span class="c1"># High Speed mode 2 - 1.7 MHz</span>
+</span></code></pre></div>
+<h3 id="spispeed">SPISPEED<a class="headerlink" href="#spispeed" title="Permanent link">&para;</a></h3>
+<p>SPI speed definition.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">class</span> <span class="nc">SPISPEED</span><span class="p">:</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="n">SPI250KBIT</span> <span class="o">=</span> <span class="mi">240</span>        <span class="c1"># COINES_SPI_SPEED_250_KHZ = 240 - 250 kHz */</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="n">SPI300KBIT</span> <span class="o">=</span> <span class="mi">200</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="n">SPI400KBIT</span> <span class="o">=</span> <span class="mi">150</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="n">SPI500KBIT</span> <span class="o">=</span> <span class="mi">120</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="n">SPI600KBIT</span> <span class="o">=</span> <span class="mi">100</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    <span class="n">SPI750KBIT</span> <span class="o">=</span> <span class="mi">80</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    <span class="n">SPI1000KBIT</span> <span class="o">=</span> <span class="mi">60</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>    <span class="n">SPI1200KBIT</span> <span class="o">=</span> <span class="mi">50</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="n">SPI1250KBIT</span> <span class="o">=</span> <span class="mi">48</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="n">SPI1500KBIT</span> <span class="o">=</span> <span class="mi">40</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>    <span class="n">SPI2000KBIT</span> <span class="o">=</span> <span class="mi">30</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>    <span class="n">SPI2500KBIT</span> <span class="o">=</span> <span class="mi">24</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a>    <span class="n">SPI3000KBIT</span> <span class="o">=</span> <span class="mi">20</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>    <span class="n">SPI3750KBIT</span> <span class="o">=</span> <span class="mi">16</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>    <span class="n">SPI5000KBIT</span> <span class="o">=</span> <span class="mi">12</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>    <span class="n">SPI6000KBIT</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a>    <span class="n">SPI7500KBIT</span> <span class="o">=</span> <span class="mi">8</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a>    <span class="n">SPI10000KBIT</span> <span class="o">=</span> <span class="mi">6</span>
+</span></code></pre></div>
+<h3 id="spibits">SPIBITS<a class="headerlink" href="#spibits" title="Permanent link">&para;</a></h3>
+<p>SPI register access width.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">class</span> <span class="nc">SPIBITS</span><span class="p">:</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="n">SPI8BIT</span> <span class="o">=</span> <span class="mi">8</span> <span class="c1"># 8 bit register read/write</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="n">SPI16BIT</span> <span class="o">=</span> <span class="mi">16</span>   <span class="c1"># 16 bit register read/write</span>
+</span></code></pre></div>
+<h3 id="spimode">SPIMODE<a class="headerlink" href="#spimode" title="Permanent link">&para;</a></h3>
+<p>SPI MODE definition.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">class</span> <span class="nc">SPIMODE</span><span class="p">:</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="n">MODE0</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># SPI Mode 0: CPOL=0; CPHA=0</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>    <span class="n">MODE1</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># SPI Mode 1: CPOL=0; CPHA=1</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="n">MODE2</span> <span class="o">=</span> <span class="mi">2</span>       <span class="c1"># SPI Mode 2: CPOL=1; CPHA=0</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="n">MODE3</span> <span class="o">=</span> <span class="mi">3</span>       <span class="c1"># SPI Mode 3: CPOL=1; CPHA=1</span>
+</span></code></pre></div>
+<h3 id="shuttleboardpin">ShuttleBoardPin<a class="headerlink" href="#shuttleboardpin" title="Permanent link">&para;</a></h3>
+<p>Definiton of pins on the shuttle board which can be used as general purpose input/output pins.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">class</span> <span class="nc">ShuttleBoardPin</span><span class="p">:</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="n">COINES_SHUTTLE_PIN_7</span> <span class="o">=</span> <span class="mi">9</span>    <span class="c1"># CS pin</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">COINES_SHUTTLE_PIN_8</span> <span class="o">=</span> <span class="mi">5</span>    <span class="c1"># Multi-IO 5</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="n">COINES_SHUTTLE_PIN_9</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Multi-IO 0</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="n">COINES_SHUTTLE_PIN_14</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># Multi-IO 1</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>    <span class="n">COINES_SHUTTLE_PIN_15</span> <span class="o">=</span> <span class="mi">2</span>   <span class="c1"># Multi-IO 2</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="n">COINES_SHUTTLE_PIN_16</span> <span class="o">=</span> <span class="mi">3</span>   <span class="c1"># Multi-IO 3</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="n">COINES_SHUTTLE_PIN_19</span> <span class="o">=</span> <span class="mi">8</span>   <span class="c1"># Multi-IO 8</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>    <span class="n">COINES_SHUTTLE_PIN_20</span> <span class="o">=</span> <span class="mi">6</span>   <span class="c1"># Multi-IO 6</span>
+</span><span id="__span-24-10"><a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>    <span class="n">COINES_SHUTTLE_PIN_21</span> <span class="o">=</span> <span class="mi">7</span>   <span class="c1"># Multi-IO 7</span>
+</span><span id="__span-24-11"><a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="n">COINES_SHUTTLE_PIN_22</span> <span class="o">=</span> <span class="mi">4</span>   <span class="c1"># Multi-IO 4</span>
+</span><span id="__span-24-12"><a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>
+</span><span id="__span-24-13"><a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a><span class="c1"># APP3.0 pins</span>
+</span><span id="__span-24-14"><a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_1_4</span> <span class="o">=</span> <span class="mh">0x10</span>  <span class="c1"># GPIO0</span>
+</span><span id="__span-24-15"><a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_1_5</span> <span class="o">=</span> <span class="mh">0x11</span>  <span class="c1"># GPIO1</span>
+</span><span id="__span-24-16"><a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_1_6</span> <span class="o">=</span> <span class="mh">0x12</span>  <span class="c1"># GPIO2/INT1</span>
+</span><span id="__span-24-17"><a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_1_7</span> <span class="o">=</span> <span class="mh">0x13</span>  <span class="c1"># GPIO3/INT2</span>
+</span><span id="__span-24-18"><a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_2_5</span> <span class="o">=</span> <span class="mh">0x14</span>  <span class="c1"># GPIO4</span>
+</span><span id="__span-24-19"><a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_2_6</span> <span class="o">=</span> <span class="mh">0x15</span>  <span class="c1"># GPIO5</span>
+</span><span id="__span-24-20"><a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_2_1</span> <span class="o">=</span> <span class="mh">0x16</span>  <span class="c1"># CS</span>
+</span><span id="__span-24-21"><a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>    <span class="n">COINES_MINI_SHUTTLE_PIN_2_3</span> <span class="o">=</span> <span class="mh">0x17</span>  <span class="c1"># SDO</span>
+</span></code></pre></div>
+<h3 id="multiio">MULTIIO<a class="headerlink" href="#multiio" title="Permanent link">&para;</a></h3>
+<p>Definiton of pins on the shuttle board which can be used as general purpose input/output pins (these definitions are only for backward compatibilty, please use those definitions as stated in <a href="#shuttleboardpin">ShuttleBoardPin</a>).</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">class</span> <span class="nc">MULTIIO</span><span class="p">:</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>    <span class="n">MULTIIO_0</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="n">MULTIIO_1</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>    <span class="n">MULTIIO_2</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>    <span class="n">MULTIIO_3</span> <span class="o">=</span> <span class="mi">3</span>
+</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>    <span class="n">MULTIIO_4</span> <span class="o">=</span> <span class="mi">4</span>
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>    <span class="n">MULTIIO_5</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>    <span class="n">MULTIIO_6</span> <span class="o">=</span> <span class="mi">6</span>
+</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>    <span class="n">MULTIIO_7</span> <span class="o">=</span> <span class="mi">7</span>
+</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>    <span class="n">MULTIIO_8</span> <span class="o">=</span> <span class="mi">8</span>
+</span><span id="__span-25-11"><a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>
+</span><span id="__span-25-12"><a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="c1"># Old style naming for APP3.0 pins</span>
+</span><span id="__span-25-13"><a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="k">class</span> <span class="nc">GPIO</span><span class="p">:</span>
+</span><span id="__span-25-14"><a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>    <span class="n">GPIO_0</span> <span class="o">=</span> <span class="mh">0x10</span>
+</span><span id="__span-25-15"><a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>    <span class="n">GPIO_1</span> <span class="o">=</span> <span class="mh">0x11</span>
+</span><span id="__span-25-16"><a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>    <span class="n">GPIO_2</span> <span class="o">=</span> <span class="mh">0x12</span>
+</span><span id="__span-25-17"><a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>    <span class="n">GPIO_3</span> <span class="o">=</span> <span class="mh">0x13</span>
+</span><span id="__span-25-18"><a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>    <span class="n">GPIO_4</span> <span class="o">=</span> <span class="mh">0x14</span>
+</span><span id="__span-25-19"><a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>    <span class="n">GPIO_5</span> <span class="o">=</span> <span class="mh">0x15</span>
+</span></code></pre></div>
+<h2 id="error-codes">Error Codes<a class="headerlink" href="#error-codes" title="Permanent link">&para;</a></h2>
+<p>Error codes are not (always) returned by the different function calls. Internally, a <code>ERRORCODE</code> variable is maintained which is updated after the function call. It can be read out and checked by the user afterwards.
+Example:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">BOARD</span> <span class="o">=</span> <span class="n">coinespy</span><span class="o">.</span><span class="n">UserApplicationBoard</span><span class="p">()</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="k">try</span><span class="p">:</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>    <span class="n">BOARD</span><span class="o">.</span><span class="n">PCInterfaceConfig</span><span class="p">(</span><span class="n">PCINTERFACE</span><span class="o">.</span><span class="n">USB</span><span class="p">)</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="k">except</span><span class="p">:</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Board initialization failed: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">BOARD</span><span class="o">.</span><span class="n">ERRORCODE</span><span class="p">))</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>    <span class="n">exit</span><span class="p">(</span><span class="n">BOARD</span><span class="o">.</span><span class="n">ERRORCODE</span><span class="p">)</span>
+</span></code></pre></div>
+<h3 id="general-error-codes">General Error Codes<a class="headerlink" href="#general-error-codes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Error Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">0</td>
+<td>No Error response/Success</td>
+</tr>
+<tr>
+<td align="center">-1</td>
+<td>Failure</td>
+</tr>
+<tr>
+<td align="center">-2</td>
+<td>Length Error</td>
+</tr>
+<tr>
+<td align="center">-4</td>
+<td>Configuration is Unsuccessful</td>
+</tr>
+<tr>
+<td align="center">-5</td>
+<td>Invalid Instruction</td>
+</tr>
+<tr>
+<td align="center">-6</td>
+<td>Memory Error</td>
+</tr>
+<tr>
+<td align="center">-100</td>
+<td>Timeout</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pinconfig-specific-error-codes">Pinconfig Specific Error Codes<a class="headerlink" href="#pinconfig-specific-error-codes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Error Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td>Analog Switch is turned ON/OFF</td>
+</tr>
+<tr>
+<td align="center">-10</td>
+<td>Invalid Pin</td>
+</tr>
+<tr>
+<td align="center">-19</td>
+<td>Invalid ADC Pin</td>
+</tr>
+</tbody>
+</table>
+<h3 id="readwrite-specific-error-codes">Read/Write Specific Error Codes<a class="headerlink" href="#readwrite-specific-error-codes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Error Values</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">2</td>
+<td>Default read of 128 bytes is done. Requested bytes of read not supported. For APP2.0 board read more than 128 bytes is possible and up to 1204 bytes</td>
+</tr>
+<tr>
+<td align="center">-3</td>
+<td>The number of bytes that shall be read is 2kB. If this exceeds, error code is updated.</td>
+</tr>
+<tr>
+<td align="center">-18</td>
+<td>For APP2.0 the maximum number of bytes that shall be written for burst operation is 2kB based on RAM requirements. For AB/DB, due to RAM size the maximum number of bytes that shall be written for burst operation is 46 bytes.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="migration-from-genericapi-to-coinespy">Migration from 'GenericAPI' to coinespy<a class="headerlink" href="#migration-from-genericapi-to-coinespy" title="Permanent link">&para;</a></h2>
+<p>The attempt was undertaken to keep the names of functions, constants and variables as close as possible to the GenericAPI. To migrate to coinespy, the user should only need to remove the .NET related library (i.e. <code>import clr</code>) and import coinespy as BST, as shown in the example files.</p>
+<p>Old code may still contain some type conversions which are not necessary anymore. To avoid errors, the user could either modify the code or simply add these lines to his code (at the top of the file):</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span> <span class="nf">Byte</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>    <span class="k">return</span> <span class="n">value</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="k">def</span> <span class="nf">UInt16</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>    <span class="k">return</span> <span class="n">value</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="k">def</span> <span class="nf">Array</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>    <span class="k">return</span> <span class="n">value</span>    
+</span></code></pre></div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.expand", "navigation.top", "header.autohide", "content.code.copy"], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.51198bba.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
